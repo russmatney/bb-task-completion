@@ -1,0 +1,17 @@
+#compdef _bb bb
+
+# Very helpful guide to zsh completion implementations:
+# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+
+# This file should be located somewhere on your zsh `fpath`, and is currently
+# implemented with a hard-coded path to `bb_task_completion.clj`.
+
+function _bb {
+  local tasknames
+  tasknames=$(bb ~/.zsh/bb_task_completion.clj)
+  if [ $tasknames ]; then
+    tasknames=${tasknames:1:-1}
+    _alternative \
+      "tasks:bb.edn tasks:(($tasknames))"
+  fi
+}

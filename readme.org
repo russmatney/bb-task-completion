@@ -1,0 +1,46 @@
+#+TITLE: BB Task Completion
+
+Created to toy with zsh completion for bb's new tasks feature.
+
+* Resources:
+
+BB Tasks spec/issue: https://github.com/babashka/babashka/issues/778
+
+bb.edn examples:
+
+- Antq bb.edn example: https://github.com/borkdude/antq/blob/bb-run/bb.edn
+  (copied into bb.edn in this repo as an example)
+- Two more: https://gist.github.com/borkdude/35bc0a20bd4c112dec2c5645f67250e3
+
+Zsh completion help:
+
+- Zsh completion script guide: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+  This guide in particular was very useful!
+- Zsh completion blog post: https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
+
+* Zsh autocompletion
+Something like the following is typical to get zsh completion working (see the
+first few paragraphs [[https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html][here]] for reference):
+
+#+begin_src zsh
+# add completion files to fpath
+fpath=(~/.zsh/completion $fpath)
+
+# initialize completion system
+autoload -Uz compinit && compinit -i
+#+end_src
+
+* bb task completion
+Completion for bb requires a zsh file in ~/.zsh/completion/_bb (or wherever you
+append your ~fpath~ above).
+
+See ~_bb~ and ~bb_task_completion.clj~ for a working implementation.
+
+Some open questions:
+
+- [ ] what's the expected installation process for bb users?
+  We can probably get people to add a `source <(some-bb-command)` line to do the
+  work
+- [ ] where should the helper script live?
+  Right now the task uses a hard-coded bb helper script to parse the bb.edn and
+  format a string for zsh. Maybe this should live somewhere in the babashka repo itself?
