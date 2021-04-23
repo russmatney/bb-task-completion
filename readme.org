@@ -4,19 +4,16 @@ Created to toy with zsh completion for bb's new tasks feature.
 
 * Resources:
 
-BB Tasks spec/issue: https://github.com/babashka/babashka/issues/778
+[[https://github.com/babashka/babashka/issues/778][BB Tasks spec/issue]]
 
 bb.edn examples:
 
-- Antq bb.edn example: https://github.com/borkdude/antq/blob/bb-run/bb.edn
-  (copied into bb.edn in this repo as an example)
-- Two more: https://gist.github.com/borkdude/35bc0a20bd4c112dec2c5645f67250e3
+- [[https://github.com/borkdude/antq/blob/bb-run/bb.edn][Antq bb.edn example]] (copied into the ~bb.edn~ in this repo)
 
 Zsh completion help:
 
-- Zsh completion script guide: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
-  This guide in particular was very useful!
-- Zsh completion blog post: https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
+- [[https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org][Zsh completion script guide]] - this guide in particular is very useful!
+- [[https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html][Zsh completion blog post]]
 
 * Zsh autocompletion
 Something like the following is typical to get zsh completion working (see the
@@ -30,17 +27,36 @@ fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 #+end_src
 
-* bb task completion
-Completion for bb requires a zsh file in ~/.zsh/completion/_bb (or wherever you
-append your ~fpath~ above).
+* BB task completion
+Completion for bb requires a zsh file in ~/.zsh/completion/_bb~ (or wherever you
+append your ~fpath~).
 
-See ~_bb~ and ~bb_task_completion.clj~ for a working implementation.
+See ~./_bb~ and ~./bb_task_completion.clj~ for a working implementation.
 
-Some open questions:
+** Installation
 
-- [ ] what's the expected installation process for bb users?
+This repo was implemented as a proof of concept, and is not at all intended as a
+final product for bb-based completion. However if you want to try it, something
+like this could work as a manual install process.
+
+#+begin_src sh
+# clone this repo to ~/russmatney/bb-task-completion
+ln -s ~/russmatney/bb-task-completion/bb_task_completion.clj ~/.zsh/bb_task_completion.clj
+ln -s ~/russmatney/bb-task-completion/_bb ~/.zsh/completion/_bb
+#+end_src
+
+* Open questions
+- What's the expected installation process for bb users?
+
   We can probably get people to add a `source <(some-bb-command)` line to do the
   work
-- [ ] where should the helper script live?
-  Right now the task uses a hard-coded bb helper script to parse the bb.edn and
-  format a string for zsh. Maybe this should live somewhere in the babashka repo itself?
+
+- Where should the ~bb_task_completion.clj~ script/logic live?
+  Right now the task uses a hard-coded helper script to parse the bb.edn and
+  format a string. Maybe this should live somewhere in the babashka repo itself?
+
+  As implemented, users will need to install two scripts, which is not ideal.
+
+* Next steps
+
+- Completion for the rest of the bb cli options?
