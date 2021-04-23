@@ -12,12 +12,14 @@
          pom (clojure "-Spom")
          clean (shell "rm -rf .cpcache target")
          uberjar {:depends [pom]
+                  :doc "Build the best uberjar this side of the milkyway"
                   :task (clojure "-X:depstar uberjar
                                  :aot true
                                  :main-class antq.core
                                  :aliases [:nop]
                                  :jar" standalone-jar-file)}
          jar {:depends [pom clean]
+              :doc "Build a regular jar without pomp and frills."
               :task (clojure "-X:depstar jar :jar" jar-file)}
          install {:depends [jar]
                   :task (clojure "-X:deploy :installer :local :artifact" jar-file)}

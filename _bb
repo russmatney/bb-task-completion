@@ -10,6 +10,7 @@ function _bb {
   local tasknames
   tasknames=$(bb ~/.zsh/bb_task_completion.clj)
   if [ $tasknames ]; then
+    # remove surrounding bb output string quotes ("")
     tasknames=${tasknames:1:-1}
     _alternative \
       "tasks:bb.edn tasks:(($tasknames))"

@@ -2,8 +2,7 @@
 
 Created to toy with zsh completion for bb's new tasks feature.
 
-* Resources:
-
+* Resources
 [[https://github.com/babashka/babashka/issues/778][BB Tasks spec/issue]]
 
 bb.edn examples:
@@ -34,7 +33,6 @@ append your ~fpath~).
 See ~./_bb~ and ~./bb_task_completion.clj~ for a working implementation.
 
 ** Installation
-
 This repo was implemented as a proof of concept, and is not at all intended as a
 final product for bb-based completion. However if you want to try it, something
 like this could work as a manual install process.
@@ -58,5 +56,4 @@ ln -s ~/russmatney/bb-task-completion/_bb ~/.zsh/completion/_bb
   As implemented, users will need to install two scripts, which is not ideal.
 
 * Next steps
-
 - Completion for the rest of the bb cli options?

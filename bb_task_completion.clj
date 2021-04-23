@@ -12,8 +12,8 @@
         (remove (comp keyword? first))
         (map (fn [[name task-v]]
                (str name ":'"
-                    ;; TODO stringified task definition for now b/c it's easy
-                    ;; could reach for a task docstring here
-                    (str task-v)
+                    (:doc task-v
+                          ;; falls back to stringified task definition
+                          (str task-v))
                     "'")))
         (string/join " ")))
