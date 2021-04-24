@@ -3,6 +3,12 @@
 (require '[clojure.edn :as edn])
 (require '[babashka.fs :as fs])
 
+(defn stringify-task [t]
+  (string/replace (str t) #"('|\")" ""))
+
+(defn help-string [t]
+  (:doc t (stringify-task t)))
+
 (when (fs/exists? "./bb.edn")
       (->>
         "./bb.edn"
@@ -11,9 +17,5 @@
         :tasks
         (remove (comp keyword? first))
         (map (fn [[name task-v]]
-               (str name ":'"
-                    (:doc task-v
-                          ;; falls back to stringified task definition
-                          (str task-v))
-                    "'")))
+               (str name ":'" (help-string task-v) "'")))
         (string/join " ")))
