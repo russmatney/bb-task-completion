@@ -2,6 +2,19 @@
 
 Created to toy with zsh completion for bb's new tasks feature.
 
+* Update: BB-Book recommended solution
+A simpler version of the feature implemented in this repo can be achived by
+adding the following to your zshrc. (From the [[https://book.babashka.org/#_zsh][Babashka book]].)
+
+#+begin_src zsh
+_bb_tasks() {
+    local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
+    compadd -a matches
+    _files # autocomplete filenames as well
+}
+compdef _bb_tasks bb
+#+end_src
+
 * Resources
 [[https://github.com/babashka/babashka/issues/778][BB Tasks spec/issue]]
 
